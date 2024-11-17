@@ -1,0 +1,12 @@
+# College Docs
+*.docx
+*.doc
+
+# Output Files
+Proyecto/build/
+*.obj
+*.o
+*.exe
+
+# VSC Files
+.vscode/
