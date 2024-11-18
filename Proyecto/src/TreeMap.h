@@ -37,7 +37,7 @@ void TreeMap<K, V>::clear() {
 /// @return Returns true if this map contains a mapping for the specified key.
 template <typename K, typename V>
 bool TreeMap<K, V>::containsKey(K key) {
-
+    return false;
 };
 
 /// @brief Get the value of the mapping with a specified key.
@@ -47,7 +47,7 @@ bool TreeMap<K, V>::containsKey(K key) {
 /// @return Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.
 template <typename K, typename V>
 V& TreeMap<K, V>::get(K key) {
-
+    return nullptr;
 };
 
 /// @brief Returns a Set view of the keys contained in this map.
@@ -56,7 +56,7 @@ V& TreeMap<K, V>::get(K key) {
 /// @return Returns a Set view of the keys contained in this map.
 template <typename K, typename V>
 BinaryTree<K> TreeMap<K, V>::keySet() {
-
+    return nullptr;
 };
 
 /// @brief Associates the specified value with the specified key in this map.
@@ -66,7 +66,7 @@ BinaryTree<K> TreeMap<K, V>::keySet() {
 /// @param value Specified Input Value
 template <typename K, typename V>
 void TreeMap<K, V>::put(K key, V value) {
-
+    
 };
 
 /// @brief Get the integer value amount of key-value mappings in the map.
@@ -75,7 +75,7 @@ void TreeMap<K, V>::put(K key, V value) {
 /// @return Returns the integer of key-value mappings in this map.
 template <typename K, typename V>
 int TreeMap<K, V>::size() {
-
+    return 0;
 };
 
 /// @brief Removes the item denoted by the given key.
@@ -85,7 +85,7 @@ int TreeMap<K, V>::size() {
 /// @return True if successful, false otherwise.
 template <typename K, typename V>
 bool TreeMap<K, V>::removeKey(K key) {
-
+    return false;
 };
 
 /// @brief Get the value of the mapping with a specified key.
@@ -95,7 +95,7 @@ bool TreeMap<K, V>::removeKey(K key) {
 /// @return Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.
 template <typename K, typename V>
 V& TreeMap<K, V>::operator[](K key) {
-
+    return nullptr;
 };
 
 #endif
