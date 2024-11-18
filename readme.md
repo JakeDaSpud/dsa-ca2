@@ -26,12 +26,12 @@ I build with g++ with these commands from the ```Proyecto/``` directory:
 
 App Compiling
 ```
-g++ src/app_name.cpp -o ./build/bin/app_name.exe
+g++ -static src/app_name.cpp -o ./build/bin/app_name.exe
 ```
 
 Tests Compiling
 ```
-g++ testing/test_file_name.cpp -o ./build/bin/test_file_name.exe
+g++ -static testing/test_file_name.cpp -o ./build/bin/test_file_name.exe
 ```
 
 ---
@@ -49,7 +49,7 @@ Turn the provided Binary Search Tree code into TreeMap code, and implement these
 | void put(K key, V value) | Associates the specified value with the specified key in this map. |
 | int size() | Returns the number of key-value mappings in this map. |
 | bool removeKey(K key) | Removes the item denoted by the given key. |
-| V& operator\[K key\] | Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key. |
+| V& operator\[\](K key) | Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key. |
 
 ---
 

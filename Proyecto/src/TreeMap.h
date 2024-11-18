@@ -13,13 +13,13 @@ private:
 public:
     TreeMap();
     void clear();
-    bool containsKey(K K);
+    bool containsKey(K key);
     V& get(K key);
     BinaryTree<K> keySet();
     void put(K key, V value);
     int size();
     bool removeKey(K key);
-    V& operator[K key];
+    V& operator[](K key);
 };
 
 template <typename K, typename V>
