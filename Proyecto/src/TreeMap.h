@@ -22,9 +22,80 @@ public:
     V& operator[](K key);
 };
 
+/// @brief Removes all entries from the Map.
+/// @tparam K Datatype of the KVPair Key
+/// @tparam V Datatype of the KVPair Value
 template <typename K, typename V>
 void TreeMap<K, V>::clear() {
     this->tree.clear();
-}
+};
+
+/// @brief Check if a mapping has a specified key.
+/// @tparam K Datatype of the KVPair Key
+/// @tparam V Datatype of the KVPair Value
+/// @param key Specified Key
+/// @return Returns true if this map contains a mapping for the specified key.
+template <typename K, typename V>
+bool TreeMap<K, V>::containsKey(K key) {
+
+};
+
+/// @brief Get the value of the mapping with a specified key.
+/// @tparam K Datatype of the KVPair Key
+/// @tparam V Datatype of the KVPair Value
+/// @param key Specified Key
+/// @return Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.
+template <typename K, typename V>
+V& TreeMap<K, V>::get(K key) {
+
+};
+
+/// @brief Returns a Set view of the keys contained in this map.
+/// @tparam K Datatype of the KVPair Key
+/// @tparam V Datatype of the KVPair Value
+/// @return Returns a Set view of the keys contained in this map.
+template <typename K, typename V>
+BinaryTree<K> TreeMap<K, V>::keySet() {
+
+};
+
+/// @brief Associates the specified value with the specified key in this map.
+/// @tparam K Datatype of the KVPair Key
+/// @tparam V Datatype of the KVPair Value
+/// @param key Specified Input Key
+/// @param value Specified Input Value
+template <typename K, typename V>
+void TreeMap<K, V>::put(K key, V value) {
+
+};
+
+/// @brief Get the integer value amount of key-value mappings in the map.
+/// @tparam K Datatype of the KVPair Key
+/// @tparam V Datatype of the KVPair Value
+/// @return Returns the integer of key-value mappings in this map.
+template <typename K, typename V>
+int TreeMap<K, V>::size() {
+
+};
+
+/// @brief Removes the item denoted by the given key.
+/// @tparam K Datatype of the KVPair Key
+/// @tparam V Datatype of the KVPair Value
+/// @param key Specified Key
+/// @return True if successful, false otherwise.
+template <typename K, typename V>
+bool TreeMap<K, V>::removeKey(K key) {
+
+};
+
+/// @brief Get the value of the mapping with a specified key.
+/// @tparam K Datatype of the KVPair Key
+/// @tparam V Datatype of the KVPair Value
+/// @param key Specified Key
+/// @return Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.
+template <typename K, typename V>
+V& TreeMap<K, V>::operator[](K key) {
+
+};
 
 #endif
