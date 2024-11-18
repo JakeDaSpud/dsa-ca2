@@ -37,6 +37,15 @@ void TreeMap<K, V>::clear() {
 /// @return Returns true if this map contains a mapping for the specified key.
 template <typename K, typename V>
 bool TreeMap<K, V>::containsKey(K key) {
+    bool keyFound = false;
+
+    BSTNode<KVPair> wantedKey;
+    wantedKey.key = key;
+
+    if (tree->get(wantedKey)) {
+
+    }
+    
     return false;
 };
 

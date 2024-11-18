@@ -7,8 +7,7 @@
 #include <iostream>
 
 template <class T>
-class BinaryTree
-{
+class BinaryTree {
 private:
 	void addItemToArray(BSTNode<T>* node, int &pos, T *arr);
 public:
@@ -33,22 +32,19 @@ public:
 };
 
 template <class T>
-BinaryTree<T>::BinaryTree()
-{
+BinaryTree<T>::BinaryTree() {
 	root = nullptr;
 }
 
 template <class T>
-BinaryTree<T>::BinaryTree(const BinaryTree<T>& other)
-{
+BinaryTree<T>::BinaryTree(const BinaryTree<T>& other) {
 	root = nullptr;
 	if(other.root != nullptr)
 		root = new BSTNode<T>(*other.root);
 }
 
 template <class T>
-BinaryTree<T> BinaryTree<T>::operator=(const BinaryTree<T>& other)
-{
+BinaryTree<T> BinaryTree<T>::operator=(const BinaryTree<T>& other) {
 	if (this == &other)
 		return *this;
 	if (other.root != nullptr)
@@ -60,79 +56,72 @@ BinaryTree<T> BinaryTree<T>::operator=(const BinaryTree<T>& other)
 }
 
 template <class T>
-void BinaryTree<T>::add(T& item)
-{
-	if (root == nullptr)
-	{
+void BinaryTree<T>::add(T& item) {
+	if (root == nullptr) {
 		root = new BSTNode<T>(item);
 		root->setItem(item);
 	}
-	else
-	{
+
+	else {
 		root->add(item);
 	}
 }
 
 template <class T>
-int BinaryTree<T>::count()
-{
+int BinaryTree<T>::count() {
 	if (root == nullptr)
 		return 0;
 	return root->count();
 }
 
 template <class T>
-bool BinaryTree<T>::remove(T& item)
-{
+bool BinaryTree<T>::remove(T& item) {
 	BSTNode<T> *toBeRemoved = root;
 	BSTNode<T> *parent = nullptr;
 	bool found = false;
 
-	while (!found && toBeRemoved != nullptr)
-	{
+	while (!found && toBeRemoved != nullptr) {
 
-		if (toBeRemoved->getItem() == item)
-		{
+		if (toBeRemoved->getItem() == item) {
 
 			found = true;
 		}
-		else
-		{
+
+		else {
 			parent = toBeRemoved;
-			if (toBeRemoved->getItem() > item)
-			{
+			if (toBeRemoved->getItem() > item) {
 				toBeRemoved = toBeRemoved->getLeft();
 			}
-			else
-			{
+
+			else {
 				toBeRemoved = toBeRemoved->getRight();
 			}
 		}
 	}
+
 	if (!found)
 		return false;
 
-	if (toBeRemoved->getLeft() == nullptr || toBeRemoved->getRight() == nullptr)
-	{
+	if (toBeRemoved->getLeft() == nullptr || toBeRemoved->getRight() == nullptr) {
 		BSTNode<T> *newChild;
-		if (toBeRemoved->getLeft() == nullptr)
-		{
+
+		if (toBeRemoved->getLeft() == nullptr) {
 			newChild = toBeRemoved->getRight();
 		}
-		else
-		{
+
+		else {
 			newChild = toBeRemoved->getLeft();
 		}
-		if (parent == nullptr)
-		{
+
+		if (parent == nullptr) {
 			root = newChild;
 		}
-		else if (parent->getLeft() == toBeRemoved)
-		{
+
+		else if (parent->getLeft() == toBeRemoved) {
 			parent->setLeft(newChild);
 		}
-		else
-		{
+
+		else {
 			parent->setRight(newChild);
 		}
 		return true;
@@ -140,31 +129,29 @@ bool BinaryTree<T>::remove(T& item)
 
 	BSTNode<T> *smallestParent = toBeRemoved;
 	BSTNode<T> *smallest = toBeRemoved->getRight();
-	while (smallest->getLeft() != nullptr)
-	{
+
+	while (smallest->getLeft() != nullptr) {
 		smallestParent = smallest;
 		smallest = smallest->getLeft();
 	}
+
 	toBeRemoved->setItem(smallest->getItem());
-	if (smallestParent == toBeRemoved)
-	{
+
+	if (smallestParent == toBeRemoved) {
 		smallestParent->setRight(smallest->getRight());
 	}
-	else
-	{
+
+	else {
 		smallestParent->setLeft(smallest->getRight());
 	}
 
 }
 
 template <class T>
-T& BinaryTree<T>::get(T& item)
-{
+T& BinaryTree<T>::get(T& item) {
 	bool found = false;
 	BSTNode<T>* current = root;
-	while (!found)
-	{
-	
+	while (!found) {
 		if (current == nullptr)
 			break;
 		if (current->getItem() == item)
@@ -178,10 +165,8 @@ T& BinaryTree<T>::get(T& item)
 }
 
 template <class T>
-void BinaryTree<T>::addItemToArray(BSTNode<T>* node, int &pos, T *arr)
-{
-	if (node != nullptr)
-	{
+void BinaryTree<T>::addItemToArray(BSTNode<T>* node, int &pos, T *arr) {
+	if (node != nullptr) {
 		addItemToArray(node->getLeft(), pos, arr);
 		arr[pos] = node->getItem();
 		pos++;
@@ -191,8 +176,7 @@ void BinaryTree<T>::addItemToArray(BSTNode<T>* node, int &pos, T *arr)
 }
 
 template <class T>
-T* BinaryTree<T>::toArray()
-{
+T* BinaryTree<T>::toArray() {
 	T *arr = new T[root->count()];
 	int pos = 0;
 	addItemToArray(root, pos, arr);
@@ -200,59 +184,50 @@ T* BinaryTree<T>::toArray()
 }
 
 template <class T>
-void BinaryTree<T>::clear()
-{
+void BinaryTree<T>::clear() {
 	delete root;
 	root = nullptr;
 }
 
 template <class T>
-BinaryTree<T>::~BinaryTree()
-{
-	if (root != nullptr)
-	{
+BinaryTree<T>::~BinaryTree() {
+	if (root != nullptr) {
 		delete root;
 		root = nullptr;
 	}
 }
 
 template<class T>
-void BinaryTree<T>::printInOrder()
-{
+void BinaryTree<T>::printInOrder() {
 	this->printInOrder(root);
 	std::cout << std::endl;
 }
 
 template<class T>
-void BinaryTree<T>::printInOrder(BSTNode<T> *node)
-{
+void BinaryTree<T>::printInOrder(BSTNode<T> *node) {
 	
 }
 
 template<class T>
-void BinaryTree<T>::printPreOrder()
-{
+void BinaryTree<T>::printPreOrder() {
 	this->printPreOrder(root);
 	std::cout << std::endl;
 }
 
 template<class T>
-void BinaryTree<T>::printPreOrder(BSTNode<T> *node)
-{
+void BinaryTree<T>::printPreOrder(BSTNode<T> *node) {
 
 	
 }
 
 template<class T>
-void BinaryTree<T>::printPostOrder()
-{
+void BinaryTree<T>::printPostOrder() {
 	this->printPostOrder(root);
 	std::cout << std::endl;
 }
 
 template<class T>
-void BinaryTree<T>::printPostOrder(BSTNode<T> *node)
-{
+void BinaryTree<T>::printPostOrder(BSTNode<T> *node) {
 
 }
 

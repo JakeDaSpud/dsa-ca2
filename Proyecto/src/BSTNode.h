@@ -3,9 +3,8 @@
 #define _BSTNODE_H_
 
 template <class T>
-class BSTNode
-{
-	
+class BSTNode {
+private:
 	BSTNode<T> *parent;
 	BSTNode<T> *left;
 	BSTNode<T> *right;
@@ -26,23 +25,19 @@ public:
 	void setRight(BSTNode<T> *r);
 	T& getItem();
 	~BSTNode();
-
 };
 
 template <class T>
-BSTNode<T>::BSTNode(const BSTNode<T>& other)
-{
+BSTNode<T>::BSTNode(const BSTNode<T>& other) {
 	left = right = nullptr;
 	if(other.left != nullptr)
 		this->left = new BSTNode<T>(*other.left);
 	if(other.right!=nullptr)
 		this->right = new BSTNode<T>(*other.right);
-
 }
 
 template <class T>
-BSTNode<T>* BSTNode<T>::operator=(const BSTNode<T>& other)
-{
+BSTNode<T>* BSTNode<T>::operator=(const BSTNode<T>& other) {
 	if (this == &other)
 		return *this;
 	left = right = nullptr;
@@ -50,72 +45,60 @@ BSTNode<T>* BSTNode<T>::operator=(const BSTNode<T>& other)
 		this->left = new BSTNode<T>(*other.left);
 	if (other.right != nullptr)
 		this->right = new BSTNode<T>(*other.right);
-	
 }
 
 template <class T>
-BSTNode<T>::~BSTNode()
-{
-	if (left != nullptr)
-	{
+BSTNode<T>::~BSTNode() {
+	if (left != nullptr) {
 		delete left;
 		left = nullptr;
 	}
-	if(right!= nullptr)
-	{
+
+	if (right!= nullptr) {
 		delete right;
 		right = nullptr;
 	}
-
 }
 
 template <class T>
-T& BSTNode<T>::getItem()
-{
+T& BSTNode<T>::getItem() {
 	return this->data;
 }
 
 template <class T>
-BSTNode<T>* BSTNode<T>::getLeft()
-{
+BSTNode<T>* BSTNode<T>::getLeft() {
 	return this->left;
 }
 
 template <class T>
-BSTNode<T>* BSTNode<T>::getRight()
-{
+BSTNode<T>* BSTNode<T>::getRight() {
 	return this->right;
 }
 
 template <class T>
-BSTNode<T>* BSTNode<T>::getParent()
-{
+BSTNode<T>* BSTNode<T>::getParent() {
 	return this->parent;
 }
 
 template <class T>
-void BSTNode<T>::setLeft(BSTNode<T> *l)
-{
+void BSTNode<T>::setLeft(BSTNode<T> *l) {
 	this->left = l;
 }
 
 template <class T>
-void BSTNode<T>::setRight(BSTNode<T> *r)
-{
+void BSTNode<T>::setRight(BSTNode<T> *r) {
 	this->right = r;
 }
 
 template <class T>
-BSTNode<T>::BSTNode()
-{
+BSTNode<T>::BSTNode() {
 	parent = nullptr;
 	left = nullptr;
 	right = nullptr;
 }
 
 template <class T>
-BSTNode<T>::BSTNode(T data)
-{
+BSTNode<T>::BSTNode(T data) {
 	parent = nullptr;
 	left = nullptr;
 	right = nullptr;
@@ -123,58 +106,53 @@ BSTNode<T>::BSTNode(T data)
 }
 
 template <class T>
-int BSTNode<T>::count()
-{
+int BSTNode<T>::count() {
 	int c = 1;
-	if (left != nullptr)
-	{
+
+	if (left != nullptr) {
 		c += left->count();
 	}
-	if (right != nullptr)
-	{
+
+	if (right != nullptr) {
 		c += right->count();
 	}
+
 	return c;
 }
 
 template <class T>
-void BSTNode<T>::add(T& item)
-{
-	if (item == this->data)
-	{
+void BSTNode<T>::add(T& item) {
+	if (item == this->data) {
 		return;
 	}
-	else if (item < this->data)
-	{
-		if (left == nullptr)
-		{
+
+	else if (item < this->data) {
+		if (left == nullptr) {
 			left = new BSTNode<T>();
 			left->data = item;
 			left->parent = this;
 		}
-		else
-		{
+
+		else {
 			left->add(item);
 		}
 	}
-	else
-	{
-		if (right == nullptr)
-		{
+	
+	else {
+		if (right == nullptr) {
 			right = new BSTNode<T>();
 			right->data = item;
 			right->parent = this;
 		}
-		else
-		{
+
+		else {
 			right->add(item);
 		}
 	}
 }
 
 template <class T>
-void BSTNode<T>::setItem(T item)
-{
+void BSTNode<T>::setItem(T item) {
 	this->data = item;
 }
 
