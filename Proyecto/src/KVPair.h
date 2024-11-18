@@ -11,18 +11,17 @@ public:
     KVPair();
     KVPair(K key, V value);
     KVPair(KVPair<K, V> &other);
+    
     K& getKey();
     V& getValue();
-    bool operator==(const KVPair<K, V> &other);
-    bool operator<(const KVPair<K, V> &other);
-    bool operator>(const KVPair<K, V> &other);
+
+    bool operator==(KVPair<K, V> &other);
+    bool operator<(KVPair<K, V> &other);
+    bool operator>(KVPair<K, V> &other);
 };
 
 template <typename K, typename V>
-KVPair<K, V>::KVPair() {
-    this->key = nullptr;
-    this->value = nullptr;
-};
+KVPair<K, V>::KVPair() { };
 
 template <typename K, typename V>
 KVPair<K, V>::KVPair(K key, V value) {
@@ -37,18 +36,28 @@ KVPair<K, V>::KVPair(KVPair<K, V> &other) {
 };
 
 template <typename K, typename V>
-bool KVPair<K, V>::operator==(const KVPair<K, V> &other) {
-    return this->getKey == other.getKey();
+K& KVPair<K, V>::getKey() {
+    return this->key;
 };
 
 template <typename K, typename V>
-bool KVPair<K, V>::operator<(const KVPair<K, V> &other) {
-    return this->getKey < other.getKey();
+V& KVPair<K, V>::getValue() {
+    return this->value;
 };
 
 template <typename K, typename V>
-bool KVPair<K, V>::operator>(const KVPair<K, V> &other) {
-    return this->getKey > other.getKey();
+bool KVPair<K, V>::operator==(KVPair<K, V> &other) {
+    return (this->key == other.getKey());
+};
+
+template <typename K, typename V>
+bool KVPair<K, V>::operator<(KVPair<K, V> &other) {
+    return (this->key < other.getKey());
+};
+
+template <typename K, typename V>
+bool KVPair<K, V>::operator>(KVPair<K, V> &other) {
+    return (this->key > other.getKey());
 };
 
 #endif

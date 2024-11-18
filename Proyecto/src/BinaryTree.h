@@ -217,7 +217,6 @@ void BinaryTree<T>::printPreOrder() {
 template<class T>
 void BinaryTree<T>::printPreOrder(BSTNode<T> *node) {
 
-	
 }
 
 template<class T>

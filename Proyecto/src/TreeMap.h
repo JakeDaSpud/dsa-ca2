@@ -6,7 +6,7 @@
 #include "KVPair.h"
 
 template <typename K, typename V>
-class TreeMap {
+class TreeMap : public BinaryTree<KVPair<K, V>> {
 private:
     BinaryTree<KVPair<K, V>> tree;
 
@@ -21,6 +21,9 @@ public:
     bool removeKey(K key);
     V& operator[](K key);
 };
+
+template <typename K, typename V>
+TreeMap<K, V>::TreeMap() {};
 
 /// @brief Removes all entries from the Map.
 /// @tparam K Datatype of the KVPair Key
@@ -39,11 +42,11 @@ template <typename K, typename V>
 bool TreeMap<K, V>::containsKey(K key) {
     bool keyFound = false;
 
-    BSTNode<KVPair> wantedKey;
-    wantedKey.key = key;
+    BSTNode<KVPair<K, V>> wantedKey;
+    wantedKey.setKey(key);
 
-    if (tree->get(wantedKey)) {
-
+    if (tree->get(wantedKey) != nullptr) {
+        return true;
     }
     
     return false;
@@ -75,7 +78,8 @@ BinaryTree<K> TreeMap<K, V>::keySet() {
 /// @param value Specified Input Value
 template <typename K, typename V>
 void TreeMap<K, V>::put(K key, V value) {
-    
+    KVPair<K, V> newNode = newNode(key, value);
+    tree.add(newNode);
 };
 
 /// @brief Get the integer value amount of key-value mappings in the map.
