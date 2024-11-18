@@ -1,10 +1,16 @@
 ﻿#pragma once
+#ifndef _BINARYTREE_H_
+#define _BINARYTREE_H_
+
 #include "BSTNode.h"
 #include <vector>
+#include <iostream>
+
 template <class T>
-class BinaryTree
-{
+class BinaryTree {
+private:
 	void addItemToArray(BSTNode<T>* node, int &pos, int *arr);
+
 public:
 	BSTNode<T> *root;
 	BinaryTree();
@@ -35,22 +41,20 @@ void BinaryTree<T>::add(T item)
 {
 	
 }
+
 template <class T>
 int BinaryTree<T>::count()
 {
 	return 0;
 }
+
 template <class T>
 bool BinaryTree<T>::remove(T item)
 {
-
+	return false;
 }
 
-
-/**
-	Helper Function to put the binary tree into a sorted array;
-
-*/
+// Helper Function to put the binary tree into a sorted array;
 template <class T>
 void BinaryTree<T>::addItemToArray(BSTNode<T>* node, int &pos, int *arr)
 {
@@ -64,10 +68,7 @@ void BinaryTree<T>::addItemToArray(BSTNode<T>* node, int &pos, int *arr)
 
 }
 
-/**
-	This function is used to convert this binary tree into a sorted array.
-
-*/
+//This function is used to convert this binary tree into a sorted array.
 template <class T>
 T* BinaryTree<T>::toArray()
 {
@@ -83,45 +84,38 @@ void BinaryTree<T>::clear()
 	delete root;
 	root = nullptr;
 }
+
 template <class T>
 BinaryTree<T>::~BinaryTree()
 {
 	delete root;
 }
 
-
-
-/*
-Print the entire tree using in order traversal
-*/
+// Print the entire tree using in order traversal
 template<class T>
 void BinaryTree<T>::printInOrder()
 {
 	this->printInOrder(root);
-	cout << endl;
+	std::cout << std::endl;
 }
-/*
-Print a subtree using in order traversal
-*/
+
+// Print a subtree using in order traversal
 template<class T>
 void BinaryTree<T>::printInOrder(BSTNode<T> *node)
 {
 	
 	
 }
-/*
-Print the entire tree using pre order traversal
-*/
+
+// Print the entire tree using pre order traversal
 template<class T>
 void BinaryTree<T>::printPreOrder()
 {
 	this->printPreOrder(root);
-	cout << endl;
+	std::cout << std::endl;
 }
 
-/*
-Print a subtree using post order traversal
-*/
+// Print a subtree using post order traversal
 template<class T>
 void BinaryTree<T>::printPreOrder(BSTNode<T> *node)
 {
@@ -129,21 +123,19 @@ void BinaryTree<T>::printPreOrder(BSTNode<T> *node)
 	
 }
 
-/*
-	Print the entire tree using post order traversal	
-*/
+// Print the entire tree using post order traversal
 template<class T>
 void BinaryTree<T>::printPostOrder()
 {
 	this->printPostOrder(root);
-	cout << endl;
+	std::cout << std::endl;
 }
-/*
-		Print a subtree using post order traversal
-*/
+
+// Print a subtree using post order traversal
 template<class T>
 void BinaryTree<T>::printPostOrder(BSTNode<T> *node)
 {
-
 	
 }
+
+#endif

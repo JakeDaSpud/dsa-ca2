@@ -1,7 +1,11 @@
 #pragma once
-/*
-recursive function to display a binary tree
-*/
+#ifndef _UTILS_H_
+#define _UTILS_H_
+
+#include "BinaryTree.h"
+#include <string>
+
+// Recursive function to display a binary tree
 template <class T>
 void printBT(const std::string& prefix, BSTNode<T>* node, bool isLeft)
 {
@@ -19,18 +23,15 @@ void printBT(const std::string& prefix, BSTNode<T>* node, bool isLeft)
 		printBT(prefix + (isLeft ? "|   " : "    "), node->getRight(), false);
 	}
 }
-/*
-Display function to print the tree
-*/
+
+// Display function to print the tree
 template <class T>
 void printBT(BSTNode<T>* node)
 {
 	printBT("", node, true);
 }
 
-/*
-Recursive Function to add each element when balancing a binary tree
-*/
+// Recursive Function to add each element when balancing a binary tree
 void createBalancedTree(BinaryTree<int> &tree, int min, int max, int *arr)
 {
 	if (min < max)
@@ -41,9 +42,8 @@ void createBalancedTree(BinaryTree<int> &tree, int min, int max, int *arr)
 		createBalancedTree(tree, mid + 1, max, arr);
 	}
 }
-/*
-Recursive Function used to balance a binary tree
-*/
+
+// Recursive Function used to balance a binary tree
 void balance(BinaryTree<int> &tree)
 {
 	int *arr = tree.toArray();
@@ -51,5 +51,6 @@ void balance(BinaryTree<int> &tree)
 	tree.clear();
 	createBalancedTree(tree, 0, max, arr);
 	delete[] arr;
-
 }
+
+#endif

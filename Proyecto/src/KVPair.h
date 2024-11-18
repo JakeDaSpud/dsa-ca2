@@ -4,6 +4,7 @@
 
 template <typename K, typename V>
 struct KVPair {
+public:
     K key;
     V value;
 };
