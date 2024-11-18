@@ -8,6 +8,7 @@ private:
     K key;
     V value;
 public:
+    KVPair();
     KVPair(K key, V value);
     KVPair(KVPair<K, V> &other);
     K& getKey();
@@ -15,6 +16,12 @@ public:
     bool operator==(const KVPair<K, V> &other);
     bool operator<(const KVPair<K, V> &other);
     bool operator>(const KVPair<K, V> &other);
+};
+
+template <typename K, typename V>
+KVPair<K, V>::KVPair() {
+    this->key = nullptr;
+    this->value = nullptr;
 };
 
 template <typename K, typename V>
