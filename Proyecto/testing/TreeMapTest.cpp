@@ -18,8 +18,6 @@ TEST_CASE("TreeMap Functions") {
         CHECK(TM.count() == 1);
     }
 
-    // Add a bunch of TM tests here
-
     // --- containskey ---
 
     SECTION("An existing key returns true") {
@@ -55,9 +53,7 @@ TEST_CASE("TreeMap Functions") {
     }
 
     // --- put ---
-    // one insert
-    // multiple inserts
-    // duplicate key: insert k1 v1, then k1 v2, make sure count() is still 1 and the k1 value has changed
+    
     SECTION("Inserting 1 works") {
         KVPair<std::string, int> red = KVPair<std::string, int>("red", 45);
         CHECK_NOTHROW(TM.put("red", 45));
@@ -83,8 +79,6 @@ TEST_CASE("TreeMap Functions") {
         CHECK(TM.size() == 1);
         
         CHECK(TM.get("red") == 999);
-
-        TM.printInOrder();
     }
 
     // --- remove key ---

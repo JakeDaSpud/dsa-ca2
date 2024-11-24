@@ -96,6 +96,22 @@ template <typename K, typename V>
 void TreeMap<K, V>::put(K key, V value) {
     KVPair<K, V> newNode = KVPair(key, value);
 
+    if (this->containsKey(key)) {
+        BSTNode<KVPair<K, V>> *currentNode = this->tree.root;
+        while (currentNode->getItem() != newNode) {
+
+            if (currentNode->getItem() < newNode) {
+                currentNode = currentNode->getRight();
+            } 
+            
+            else {
+                currentNode = currentNode->getLeft();
+            }
+        }
+
+        currentNode->getItem().setValue(value);
+    }
+
     tree.add(newNode);
 };
 

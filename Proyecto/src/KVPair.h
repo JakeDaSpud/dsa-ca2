@@ -14,8 +14,10 @@ public:
     
     K& getKey();
     V& getValue();
+    void setValue(V value);
 
     bool operator==(KVPair<K, V> &other);
+    bool operator!=(KVPair<K, V> &other);
     bool operator<(KVPair<K, V> &other);
     bool operator>(KVPair<K, V> &other);
 };
@@ -46,8 +48,18 @@ V& KVPair<K, V>::getValue() {
 };
 
 template <typename K, typename V>
+void KVPair<K, V>::setValue(V value) {
+    this->value = value;
+};
+
+template <typename K, typename V>
 bool KVPair<K, V>::operator==(KVPair<K, V> &other) {
     return (this->key == other.getKey());
+};
+
+template <typename K, typename V>
+bool KVPair<K, V>::operator!=(KVPair<K, V> &other) {
+    return (this->key != other.getKey());
 };
 
 template <typename K, typename V>
