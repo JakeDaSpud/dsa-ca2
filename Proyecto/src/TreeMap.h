@@ -40,13 +40,29 @@ void TreeMap<K, V>::clear() {
 /// @return Returns true if this map contains a mapping for the specified key.
 template <typename K, typename V>
 bool TreeMap<K, V>::containsKey(K key) {
+
+    if (this->tree.count() == 0) {
+        return false;
+    }
+
     bool keyFound = false;
 
-    BSTNode<KVPair<K, V>> wantedKey;
-    wantedKey.setKey(key);
+    V defaultValue = V();
+    KVPair<K, V> toFind = KVPair(key, defaultValue);
 
-    if (tree->get(wantedKey) != nullptr) {
-        return true;
+    BSTNode<KVPair<K, V>> *currentNode = this->tree.root;
+    while (!keyFound) {
+        if (currentNode->getItem() == toFind) {
+            keyFound = true;
+        }
+
+        if (currentNode->getItem() > toFind && currentNode->getLeft() != nullptr) {
+            currentNode = currentNode->getLeft();
+        }
+
+        else if (currentNode->getRight() != nullptr) {
+            currentNode = currentNode->getRight();
+        }
     }
     
     return false;
@@ -59,7 +75,9 @@ bool TreeMap<K, V>::containsKey(K key) {
 /// @return Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.
 template <typename K, typename V>
 V& TreeMap<K, V>::get(K key) {
-    return nullptr;
+    V defaultValue = V();
+    KVPair<K, V> toGet = KVPair(key, defaultValue);
+    return this->tree.get(toGet).getValue();
 };
 
 /// @brief Returns a Set view of the keys contained in this map.
@@ -78,7 +96,8 @@ BinaryTree<K> TreeMap<K, V>::keySet() {
 /// @param value Specified Input Value
 template <typename K, typename V>
 void TreeMap<K, V>::put(K key, V value) {
-    KVPair<K, V> newNode = newNode(key, value);
+    KVPair<K, V> newNode = KVPair(key, value);
+
     tree.add(newNode);
 };
 
@@ -88,7 +107,7 @@ void TreeMap<K, V>::put(K key, V value) {
 /// @return Returns the integer of key-value mappings in this map.
 template <typename K, typename V>
 int TreeMap<K, V>::size() {
-    return 0;
+    return this->tree.count();
 };
 
 /// @brief Removes the item denoted by the given key.
@@ -98,7 +117,9 @@ int TreeMap<K, V>::size() {
 /// @return True if successful, false otherwise.
 template <typename K, typename V>
 bool TreeMap<K, V>::removeKey(K key) {
-    return false;
+    V defaultValue = V();
+    KVPair<K, V> toRemove = KVPair(key, defaultValue);
+    return this->tree.remove(toRemove);
 };
 
 /// @brief Get the value of the mapping with a specified key.
