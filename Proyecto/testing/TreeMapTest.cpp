@@ -34,6 +34,30 @@ TEST_CASE("TreeMap Functions") {
         CHECK(TM.containsKey("red") == true);
     }
 
+    SECTION("A non-existing key returns false") {
+        CHECK(TM.size() == 0);
+        
+        TM.put("red", 45);
+        CHECK(TM.size() == 1);
+
+        CHECK(TM.containsKey("yellow") == false);
+    }
+
+    SECTION("An existing key returns true, then, once removed, returns false") {
+        std::cout << "line 47\n";
+        CHECK(TM.size() == 0);
+        
+        TM.put("red", 45);
+        CHECK(TM.size() == 1);
+
+        CHECK(TM.containsKey("red") == true);
+
+        TM.removeKey("red");
+        CHECK(TM.size() == 0);
+
+        CHECK(TM.containsKey("red") == false);
+    }
+
     // --- put ---
     // one insert
     // multiple inserts

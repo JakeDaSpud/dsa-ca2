@@ -45,22 +45,20 @@ bool TreeMap<K, V>::containsKey(K key) {
         return false;
     }
 
-    bool keyFound = false;
-
     V defaultValue = V();
     KVPair<K, V> toFind = KVPair(key, defaultValue);
 
     BSTNode<KVPair<K, V>> *currentNode = this->tree.root;
-    while (!keyFound) {
+    while (currentNode != nullptr) {
         if (currentNode->getItem() == toFind) {
-            keyFound = true;
+            return true;
         }
 
-        if (currentNode->getItem() > toFind && currentNode->getLeft() != nullptr) {
+        if (currentNode->getItem() > toFind) {
             currentNode = currentNode->getLeft();
         }
 
-        else if (currentNode->getRight() != nullptr) {
+        else if (currentNode->getItem() < toFind) {
             currentNode = currentNode->getRight();
         }
     }
