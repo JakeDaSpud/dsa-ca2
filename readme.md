@@ -24,6 +24,12 @@ I am using [Visual Studio Code](https://code.visualstudio.com/) and [Notepad++](
 
 I build with g++ with these commands from the ```Proyecto/``` directory:
 
+*What do these commands do?*
+```g++``` is the compiler
+```-static``` is a flag to statically (not dynamically) link the header files (mainly for the catch2.h Header file), this is like baking the file into the .exe so when it is ran, it doesn't look for the file on YOUR computer to read from!
+```word/word.cpp``` this is the file I am trying to compile.
+```-o ./word/word.exe``` is a flag (pronounced "tack oh") which will define what the file should be compiled as, in this case an .exe (common executable file for windows), but I could do .obj (windows) / .o (linux), .lib (static library) / .dll (dynamically linked library).
+
 App Compiling
 ```
 g++ -static src/app_name.cpp -o ./build/bin/app_name.exe
@@ -43,13 +49,13 @@ Turn the provided Binary Search Tree code into TreeMap code, and implement these
 | Signature | Function |
 | --- | --- |
 | void clear() ✅ | Removes all entries from the Map. |
-| bool containsKey(K key) | Returns true if this map contains a mapping for the specified key. |
-| V& get(K key) | Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key. |
+| bool containsKey(K key) ✅ | Returns true if this map contains a mapping for the specified key. |
+| V& get(K key) ✅ | Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key. |
 | BinaryTree<K> keySet() | Returns a Set view of the keys contained in this map. |
-| void put(K key, V value) | Associates the specified value with the specified key in this map. |
+| void put(K key, V value) ✅ | Associates the specified value with the specified key in this map. |
 | int size() ✅ | Returns the number of key-value mappings in this map. |
 | bool removeKey(K key) ✅ | Removes the item denoted by the given key. |
-| V& operator\[\](K key) | Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key. |
+| V& operator\[\](K key) ✅ | Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key. |
 
 ---
 
