@@ -21,9 +21,6 @@ TEST_CASE("TreeMap Functions") {
     // Add a bunch of TM tests here
 
     // --- containskey ---
-    // existing key
-    // non existing key
-    // after removing a key: add key, contains key it true, remove it, contains key should be false now
 
     SECTION("An existing key returns true") {
         CHECK(TM.size() == 0);
@@ -44,7 +41,6 @@ TEST_CASE("TreeMap Functions") {
     }
 
     SECTION("An existing key returns true, then, once removed, returns false") {
-        std::cout << "line 47\n";
         CHECK(TM.size() == 0);
         
         TM.put("red", 45);
@@ -127,8 +123,31 @@ TEST_CASE("TreeMap Functions") {
     }
 
     // --- get ---
-    // get existing key
-    // get non existent key
+
+    SECTION("Getting an existing Key") {
+        CHECK(TM.size() == 0);
+        TM.put("red", 45);
+        CHECK(TM.get("red") == 45);
+    }
+
+    SECTION("Getting with square brackets is the same as getting with function") {
+        CHECK(TM.size() == 0);
+        TM.put("red", 45);
+        CHECK(TM.get("red") == 45);
+        CHECK(TM["red"] == TM.get("red"));
+    }
+
+    SECTION("Getting a non-existing Key throws a logic_error") {
+        CHECK(TM.size() == 0);
+        TM.put("red", 45);
+        CHECK_THROWS_AS(TM.get("yellow"), std::logic_error);
+    }
+
+    SECTION("Getting a non-existing Key with square brackets throws a logic_error") {
+        CHECK(TM.size() == 0);
+        TM.put("red", 45);
+        CHECK_THROWS_AS(TM["yellow"], std::logic_error);
+    }
 
     // --- clear ---
 

@@ -127,7 +127,7 @@ bool TreeMap<K, V>::removeKey(K key) {
 /// @return Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.
 template <typename K, typename V>
 V& TreeMap<K, V>::operator[](K key) {
-    return nullptr;
+    return this->get(key);
 };
 
 #endif
