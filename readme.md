@@ -25,10 +25,10 @@ I am using [Visual Studio Code](https://code.visualstudio.com/) and [Notepad++](
 I build with g++ with these commands from the ```Proyecto/``` directory:
 
 *What do these commands do?*
-```g++``` is the compiler
-```-static``` is a flag to statically (not dynamically) link the header files (mainly for the catch2.h Header file), this is like baking the file into the .exe so when it is ran, it doesn't look for the file on YOUR computer to read from!
-```word/word.cpp``` this is the file I am trying to compile.
-```-o ./word/word.exe``` is a flag (pronounced "tack oh") which will define what the file should be compiled as, in this case an .exe (common executable file for windows), but I could do .obj (windows) / .o (linux), .lib (static library) / .dll (dynamically linked library).
+```g++``` is the compiler\
+```-static``` is a flag to statically (not dynamically) link the header files (mainly for the catch2.h Header file), this is like baking the file into the .exe so when it is ran, it doesn't look for the file on YOUR computer to read from!\
+```word/word.cpp``` this is the file I am trying to compile.\
+```-o ./word/word.exe``` is a flag (pronounced "tack oh") which will define what the file should be compiled as, in this case an .exe (common executable file for windows), but I could do .obj (windows) / .o (linux), .lib (static library) / .dll (dynamically linked library).\
 
 App Compiling
 ```
