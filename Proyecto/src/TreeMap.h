@@ -88,7 +88,7 @@ BinaryTree<K> TreeMap<K, V>::keySet() {
     BinaryTree<K> treeOut;
     std::queue<BSTNode<KVPair<K, V>>*> toVisit;
 
-    if (this->size() == 0) {
+    if (this->tree.count() == 0) {
         return treeOut;
     }
 
@@ -101,7 +101,8 @@ BinaryTree<K> TreeMap<K, V>::keySet() {
         toVisit.pop();
 
         // Add the Key to treeOut
-        treeOut.add(currentNode->getItem().getKey());
+        K key = currentNode->getItem().getKey();
+        treeOut.add(key);
 
         // Check for left and right nodes and add them
         if (currentNode->getLeft() != nullptr) {
@@ -127,8 +128,13 @@ void TreeMap<K, V>::put(K key, V value) {
 
     if (this->containsKey(key)) {
         BSTNode<KVPair<K, V>> *currentNode = this->tree.root;
-        while (currentNode->getItem() != newNode) {
 
+        while (currentNode != nullptr) {
+            if (currentNode->getItem() == newNode) {
+                currentNode->getItem().setValue(value);
+                return;
+            }
+            
             if (currentNode->getItem() < newNode) {
                 currentNode = currentNode->getRight();
             } 
@@ -137,11 +143,9 @@ void TreeMap<K, V>::put(K key, V value) {
                 currentNode = currentNode->getLeft();
             }
         }
-
-        currentNode->getItem().setValue(value);
     }
 
-    tree.add(newNode);
+    this->tree.add(newNode);
 };
 
 /// @brief Get the integer value amount of key-value mappings in the map.

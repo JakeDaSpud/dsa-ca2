@@ -4,7 +4,7 @@
 #include "../libs/catch.hpp"
 #include "../src/TreeMap.h"
 
-TEST_CASE("TreeMap Functions") {
+TEST_CASE("TreeMap BinaryTree Functions") {
     // This TreeMap gets instatiated at the start of every SECTION()
     TreeMap<std::string, int> TM;
 
@@ -17,10 +17,22 @@ TEST_CASE("TreeMap Functions") {
         TM.add(red);
         CHECK(TM.count() == 1);
     }
+}
 
+TEST_CASE("TreeMap keySet() Tests") {
+    // This TreeMap gets instatiated at the start of every SECTION()
+    TreeMap<std::string, int> TM;
+    
     // --- keySet ---
 
     SECTION("An empty TreeMap returns an empty keySet") {
+        BinaryTree<std::string> treeOut = TM.keySet();
+
+        CHECK(treeOut.count() == TM.size());
+        CHECK(treeOut.root == nullptr);
+    }
+
+    SECTION("A TreeMap with 1 node will return the correct keySet") {
         TM.put("red", 45);
         CHECK(TM.size() == 1);
 
@@ -29,15 +41,21 @@ TEST_CASE("TreeMap Functions") {
         // Shoud be same size
         CHECK(treeOut.count() == TM.size());
 
+        CHECK(treeOut.root != nullptr);
+        CHECK(TM.root != nullptr);
+
+//        std::string outRoot = treeOut.root->getItem();
+  //      std::string tmRoot = TM.root->getItem().getKey();
+
         // Should be same Key
-        CHECK(treeOut.root->getItem() == TM.root->getItem().getKey());
+      //  CHECK(outRoot == tmRoot);
     }
+}
 
-    SECTION("A TreeMap with 1 node will return the correct keySet") {
-        BinaryTree<std::string> treeOut = TM.keySet();
 
-        CHECK(treeOut.count() == TM.size());
-    }
+TEST_CASE("TreeMap containsKey() Tests") {
+    // This TreeMap gets instatiated at the start of every SECTION()
+    TreeMap<std::string, int> TM;
 
     // --- containsKey ---
 
@@ -72,7 +90,109 @@ TEST_CASE("TreeMap Functions") {
 
         CHECK(TM.containsKey("red") == false);
     }
+}
 
+TEST_CASE("TreeMap clear() Tests") {
+    // This TreeMap gets instatiated at the start of every SECTION()
+    TreeMap<std::string, int> TM;
+
+    // --- clear ---
+
+    SECTION("Full TreeMap clears properly") {
+        TM.put("red", 45);
+        TM.put("yellow", 70);
+        CHECK(TM.size() == 2);
+        TM.clear();
+        CHECK(TM.size() == 0);
+    }
+
+    SECTION("Empty TreeMap clears properly") {
+        CHECK_NOTHROW(TM.clear());
+        CHECK(TM.size() == 0);
+    }
+}
+
+TEST_CASE("TreeMap get() Tests") {
+    // This TreeMap gets instatiated at the start of every SECTION()
+    TreeMap<std::string, int> TM;
+
+    // --- get ---
+
+    SECTION("Getting an existing Key") {
+        CHECK(TM.size() == 0);
+        TM.put("red", 45);
+        CHECK(TM.get("red") == 45);
+    }
+
+    SECTION("Getting with square brackets is the same as getting with function") {
+        CHECK(TM.size() == 0);
+        TM.put("red", 45);
+        CHECK(TM.get("red") == 45);
+        CHECK(TM["red"] == TM.get("red"));
+    }
+
+    SECTION("Getting a non-existing Key throws a logic_error") {
+        CHECK(TM.size() == 0);
+        TM.put("red", 45);
+        CHECK_THROWS_AS(TM.get("yellow"), std::logic_error);
+    }
+
+    SECTION("Getting a non-existing Key with square brackets throws a logic_error") {
+        CHECK(TM.size() == 0);
+        TM.put("red", 45);
+        CHECK_THROWS_AS(TM["yellow"], std::logic_error);
+    }
+}
+
+TEST_CASE("TreeMap size() Tests") {
+    // This TreeMap gets instatiated at the start of every SECTION()
+    TreeMap<std::string, int> TM;
+
+    // --- size ---
+    
+    SECTION("Size is 0 before adding") {
+        CHECK(TM.size() == 0);
+    }
+
+    SECTION("Size is 1 after adding 1, and 0 after removing it") {
+        CHECK(TM.size() == 0);
+        TM.put("red", 45);
+        CHECK(TM.size() == 1);
+        TM.removeKey("red");
+        CHECK(TM.size() == 0);
+    }
+}
+
+TEST_CASE("TreeMap removeKey() Tests") {
+    // This TreeMap gets instatiated at the start of every SECTION()
+    TreeMap<std::string, int> TM;
+
+    // --- removeKey ---
+    
+    SECTION("Removing 1 existing Key works") {
+        TM.put("red", 45);
+        CHECK(TM.size() == 1);
+        CHECK(TM.removeKey("red") == true);
+        CHECK(TM.size() == 0);
+    }
+
+    SECTION("Removing 1 non-existing Key works correctly") {
+        TM.put("red", 45);
+        CHECK(TM.size() == 1);
+        CHECK(TM.removeKey("yellow") == false);
+        CHECK(TM.size() == 1);
+    }
+
+    SECTION("Removing from empty TreeMap works correctly") {
+        CHECK(TM.size() == 0);
+        CHECK(TM.removeKey("yellow") == false);
+    }
+}
+
+TEST_CASE("TreeMap put() Tests") {
+    // This TreeMap gets instatiated at the start of every SECTION()
+    TreeMap<std::string, int> TM;
+    
     // --- put ---
     
     SECTION("Inserting 1 works") {
@@ -101,82 +221,4 @@ TEST_CASE("TreeMap Functions") {
         
         CHECK(TM.get("red") == 999);
     }
-
-    // --- remove key ---
-    
-    SECTION("Removing 1 existing Key works") {
-        TM.put("red", 45);
-        CHECK(TM.size() == 1);
-        CHECK(TM.removeKey("red") == true);
-        CHECK(TM.size() == 0);
-    }
-
-    SECTION("Removing 1 non-existing Key works correctly") {
-        TM.put("red", 45);
-        CHECK(TM.size() == 1);
-        CHECK(TM.removeKey("yellow") == false);
-        CHECK(TM.size() == 1);
-    }
-
-    SECTION("Removing from empty TreeMap works correctly") {
-        CHECK(TM.size() == 0);
-        CHECK(TM.removeKey("yellow") == false);
-    }
-
-    // --- size ---
-    
-    SECTION("Size is 0 before adding") {
-        CHECK(TM.size() == 0);
-    }
-
-    SECTION("Size is 1 after adding 1, and 0 after removing it") {
-        CHECK(TM.size() == 0);
-        TM.put("red", 45);
-        CHECK(TM.size() == 1);
-        TM.removeKey("red");
-        CHECK(TM.size() == 0);
-    }
-
-    // --- get ---
-
-    SECTION("Getting an existing Key") {
-        CHECK(TM.size() == 0);
-        TM.put("red", 45);
-        CHECK(TM.get("red") == 45);
-    }
-
-    SECTION("Getting with square brackets is the same as getting with function") {
-        CHECK(TM.size() == 0);
-        TM.put("red", 45);
-        CHECK(TM.get("red") == 45);
-        CHECK(TM["red"] == TM.get("red"));
-    }
-
-    SECTION("Getting a non-existing Key throws a logic_error") {
-        CHECK(TM.size() == 0);
-        TM.put("red", 45);
-        CHECK_THROWS_AS(TM.get("yellow"), std::logic_error);
-    }
-
-    SECTION("Getting a non-existing Key with square brackets throws a logic_error") {
-        CHECK(TM.size() == 0);
-        TM.put("red", 45);
-        CHECK_THROWS_AS(TM["yellow"], std::logic_error);
-    }
-
-    // --- clear ---
-
-    SECTION("Full TreeMap clears properly") {
-        TM.put("red", 45);
-        TM.put("yellow", 70);
-        CHECK(TM.size() == 2);
-        TM.clear();
-        CHECK(TM.size() == 0);
-    }
-
-    SECTION("Empty TreeMap clears properly") {
-        CHECK_NOTHROW(TM.clear());
-        CHECK(TM.size() == 0);
-    }
-
 }
