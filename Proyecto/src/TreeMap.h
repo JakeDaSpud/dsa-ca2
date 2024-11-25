@@ -4,6 +4,7 @@
 
 #include "BinaryTree.h"
 #include "KVPair.h"
+#include <queue>
 
 template <typename K, typename V>
 class TreeMap : public BinaryTree<KVPair<K, V>> {
@@ -84,7 +85,34 @@ V& TreeMap<K, V>::get(K key) {
 /// @return Returns a Set view of the keys contained in this map.
 template <typename K, typename V>
 BinaryTree<K> TreeMap<K, V>::keySet() {
-    return nullptr;
+    BinaryTree<K> treeOut = BinaryTree();
+    std::queue<BSTNode<KVPair<K, V>>> toVisit;
+
+    if (this->size() == 0) {
+        return treeOut;
+    }
+
+    // Start at root
+    BSTNode<KVPair<K, V>> *currentNode = this->tree.root;
+
+    // This ensures we have the same amount of keys
+    while (treeOut->count() != this->count()) {
+
+        // If there's a node, add its key to the treeOut
+        if (currentNode->getLeft() != nullptr) {
+            treeOut.add(currentNode->getLeft()->getItem().getKey());
+            toVisit.push(currentNode->getLeft());
+        }
+
+        if (currentNode->getRight() != nullptr) {
+            treeOut.add(currentNode->getRight()->getItem().getKey());
+            toVisit.push(currentNode->getRight());
+        }
+
+        currentNode = toVisit.pop();
+    }
+
+    return treeOut;
 };
 
 /// @brief Associates the specified value with the specified key in this map.
