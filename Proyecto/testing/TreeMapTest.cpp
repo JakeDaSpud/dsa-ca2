@@ -18,7 +18,28 @@ TEST_CASE("TreeMap Functions") {
         CHECK(TM.count() == 1);
     }
 
-    // --- containskey ---
+    // --- keySet ---
+
+    SECTION("An empty TreeMap returns an empty keySet") {
+        TM.put("red", 45);
+        CHECK(TM.size() == 1);
+
+        BinaryTree<std::string> treeOut = TM.keySet();
+    
+        // Shoud be same size
+        CHECK(treeOut.count() == TM.size());
+
+        // Should be same Key
+        CHECK(treeOut.root->getItem() == TM.root->getItem().getKey());
+    }
+
+    SECTION("A TreeMap with 1 node will return the correct keySet") {
+        BinaryTree<std::string> treeOut = TM.keySet();
+
+        CHECK(treeOut.count() == TM.size());
+    }
+
+    // --- containsKey ---
 
     SECTION("An existing key returns true") {
         CHECK(TM.size() == 0);
