@@ -42,13 +42,46 @@ TEST_CASE("TreeMap keySet() Tests") {
         CHECK(treeOut.count() == TM.size());
 
         CHECK(treeOut.root != nullptr);
-        CHECK(TM.root != nullptr);
+        CHECK_NOTHROW(TM.getRoot()); // Shouldn't throw logic_error because there IS a root node
 
-//        std::string outRoot = treeOut.root->getItem();
-  //      std::string tmRoot = TM.root->getItem().getKey();
+        std::string outRoot = treeOut.root->getItem();
+        std::string tmRoot = TM.getRoot()->getItem().getKey();
 
         // Should be same Key
-      //  CHECK(outRoot == tmRoot);
+        CHECK(outRoot == tmRoot);
+    }
+
+    SECTION("A TreeMap with 3 nodes will return the correct keySet") {
+        TM.put("red", 45);
+        TM.put("yellow", 90);
+        TM.put("blue", 60);
+        CHECK(TM.size() == 3);
+
+        BinaryTree<std::string> treeOut = TM.keySet();
+    
+        // Shoud be same size
+        CHECK(treeOut.count() == TM.size());
+
+        CHECK(treeOut.root != nullptr);
+        CHECK_NOTHROW(TM.getRoot()); // Shouldn't throw logic_error because there IS a root node
+
+        std::string outRoot = treeOut.root->getItem();
+        std::string tmRoot = TM.getRoot()->getItem().getKey();
+        
+        // Should be same Keys
+        CHECK(outRoot == tmRoot);
+
+        if (treeOut.root->getLeft() != nullptr) {
+            std::string outRootLeft = treeOut.root->getLeft()->getItem();
+            std::string tmRootLeft = TM.getRoot()->getLeft()->getItem().getKey();
+            CHECK(outRootLeft == tmRootLeft);
+        }
+
+        if (treeOut.root->getRight() != nullptr) {
+            std::string outRootRight = treeOut.root->getRight()->getItem();
+            std::string tmRootRight = TM.getRoot()->getRight()->getItem().getKey();
+            CHECK(outRootRight == tmRootRight);
+        }
     }
 }
 

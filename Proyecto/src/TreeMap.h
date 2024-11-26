@@ -16,6 +16,7 @@ public:
     void clear();
     bool containsKey(K key);
     V& get(K key);
+    BSTNode<KVPair<K, V>>* getRoot();
     BinaryTree<K> keySet();
     void put(K key, V value);
     int size();
@@ -77,6 +78,15 @@ V& TreeMap<K, V>::get(K key) {
     V defaultValue = V();
     KVPair<K, V> toGet = KVPair(key, defaultValue);
     return this->tree.get(toGet).getValue();
+};
+
+/// @brief Get the root KVPair of this TreeMap
+/// @tparam K Datatype of the KVPair Key
+/// @tparam V Datatype of the KVPair Value
+/// @return Pointer to Root KVPair of this TreeMap, may be nullptr
+template <typename K, typename V>
+BSTNode<KVPair<K, V>>* TreeMap<K, V>::getRoot() {
+    return this->tree.root;
 };
 
 /// @brief Returns a Set view of the keys contained in this map.
