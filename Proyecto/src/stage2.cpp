@@ -14,14 +14,24 @@ BinaryTree<char> treemapSet;
 
 int main(int argc, char const *argv[])
 {
-    
-    // Check CLI args for file location, if argc > 1 then skip asking for file
 
-    // Ask for file location or read first .txt file in a Proyecto/data/ directory
+    // If there's something passed after the app, assume that's the file path location
+    if (argc > 1) {
+        file_path = argv[1];
+    }
 
-    // read_file();
+    // Otherwise: ask in app
+    else {
+        std::cout << "Enter your file name inside of the /data folder: ";
+        std::cin >> file_path;
+        // Making sure the file is a .txt
+        if (file_path.substr(file_path.length()-4) != ".txt") { file_path += ".txt"; }
+        file_path = "Proyecto/data/" + file_path;
+    }
+
+    read_file(file_path, treemap);
     
-    // menu();
+    menu(treemap);
 
     return 0;
 }
@@ -100,7 +110,7 @@ void menu(TreeMap<char, std::string> &treemap) {
 
     do {
         std::cout <<
-        "Menu\n" <<
+        "\nMenu\n" <<
         "1. List letters with words\n" <<
         "2. View words for a certain letter\n" <<
         "0. Exit\n" <<
@@ -109,25 +119,29 @@ void menu(TreeMap<char, std::string> &treemap) {
 
         switch (userInput) {
         case '1':
-            std::cout << "[1] Listing all letters that have at least 1 word:\n";
+            std::cout << "\n[1] Listing all letters that have at least 1 word:\n";
             // print treemapSet
             break;
 
         case '2':
-            std::cout << "[2] Choose one of the following letters to view the words for:\n" ;
+            std::cout << "\n[2] Choose one of the following letters to view the words for:\n" ;
             // print treemapSet
             std::cout << "Enter: ";
             std::cin >> userInput;
             // if treemapSet.get(userInput) -> print all words
             // else "userInput char doesn't have any words"
             break;
+
+        case '0':
+            // End app, break loop
+            break;
         
         default:
-            std::cout << "Unrecognised command!";
+            std::cout << "\nUnrecognised command!";
             break;
         }
 
     } while (userInput != sentinel);
 
-    std::cout << "Goodbye! :D\n";
+    std::cout << "\nGoodbye! :D\n";
 }

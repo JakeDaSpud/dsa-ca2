@@ -2,6 +2,9 @@
 *.docx
 *.doc
 
+# Input Data Files
+Proyecto/data/*.txt
+
 # Output Files
 Proyecto/build/
 *.obj

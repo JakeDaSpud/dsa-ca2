@@ -155,7 +155,9 @@ void TreeMap<K, V>::put(K key, V value) {
         }
     }
 
-    this->tree.add(newNode);
+    else {
+        this->tree.add(newNode);
+    }
 };
 
 /// @brief Get the integer value amount of key-value mappings in the map.
