@@ -199,35 +199,59 @@ BinaryTree<T>::~BinaryTree() {
 
 template<class T>
 void BinaryTree<T>::printInOrder() {
-	this->printInOrder(root);
-	std::cout << std::endl;
+	this->printInOrder(this->root);
 }
 
 template<class T>
 void BinaryTree<T>::printInOrder(BSTNode<T> *node) {
 	
+	if (node.getLeft() != nullptr) {
+		this->printInOrder(node.getLeft());
+	}
+	
+	std::cout << node.getItem() << '\n';
+	
+	if (node.getRight() != nullptr) {
+		this->printInOrder(node.getRight());
+	}
 }
 
 template<class T>
 void BinaryTree<T>::printPreOrder() {
-	this->printPreOrder(root);
-	std::cout << std::endl;
+	this->printPreOrder(this->root);
 }
 
 template<class T>
 void BinaryTree<T>::printPreOrder(BSTNode<T> *node) {
+	
+	std::cout << node.getItem() << '\n';
 
+	if (node.getLeft() != nullptr) {
+		this->printInOrder(node.getLeft());
+	}
+	
+	if (node.getRight() != nullptr) {
+		this->printInOrder(node.getRight());
+	}
 }
 
 template<class T>
 void BinaryTree<T>::printPostOrder() {
-	this->printPostOrder(root);
-	std::cout << std::endl;
+	this->printPostOrder(this->root);
 }
 
 template<class T>
 void BinaryTree<T>::printPostOrder(BSTNode<T> *node) {
-
+	
+	if (node.getLeft() != nullptr) {
+		this->printInOrder(node.getLeft());
+	}
+	
+	if (node.getRight() != nullptr) {
+		this->printInOrder(node.getRight());
+	}
+	
+	std::cout << node.getItem() << '\n';
 }
 
 #endif
