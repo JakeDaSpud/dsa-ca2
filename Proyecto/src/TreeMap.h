@@ -7,7 +7,7 @@
 #include <queue>
 
 template <typename K, typename V>
-class TreeMap : public BinaryTree<KVPair<K, V>> {
+class TreeMap {
 private:
     BinaryTree<KVPair<K, V>> tree;
 

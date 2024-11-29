@@ -4,21 +4,6 @@
 #include "../libs/catch.hpp"
 #include "../src/TreeMap.h"
 
-TEST_CASE("TreeMap BinaryTree Functions") {
-    // This TreeMap gets instatiated at the start of every SECTION()
-    TreeMap<std::string, int> TM;
-
-    SECTION("New TreeMap has a count of 0") {
-        CHECK(TM.count() == 0);
-    }
-
-    SECTION("BinaryTree add() works") {
-        KVPair<std::string, int> red = KVPair<std::string, int>("red", 45);
-        TM.add(red);
-        CHECK(TM.count() == 1);
-    }
-}
-
 TEST_CASE("TreeMap keySet() Tests") {
     // This TreeMap gets instatiated at the start of every SECTION()
     TreeMap<std::string, int> TM;
