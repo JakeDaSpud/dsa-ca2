@@ -25,7 +25,6 @@ int main(int argc, char const *argv[])
         // Otherwise: ask in app
         else {
             std::cout << "\nEnter your file name inside of the /data folder: ";
-            std::cin >> file_path;
             // Making sure the file is a .txt
             if (file_path.length() < 5 || file_path.substr(file_path.length()-4) != ".txt") { file_path += ".txt"; }
             file_path = ".\\data\\" + file_path;
@@ -127,7 +126,7 @@ void menu(TreeMap<char, std::string> &treemap) {
         switch (userInput) {
         case '1':
             std::cout << "\n[1] Listing all letters that have at least 1 word:\n";
-            // print treemapSet
+            treemapSet.printPreOrder();
             break;
 
         case '2':
