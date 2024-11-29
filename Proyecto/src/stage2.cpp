@@ -4,32 +4,36 @@
 
 int main(int argc, char const *argv[]);
 bool valid_char(char c);
-void read_file(const std::string &file_path, TreeMap<char, std::string> &treemap);
+bool read_file(const std::string &file_path, TreeMap<char, std::string> &treemap);
 void menu(TreeMap<char, std::string> &treemap);
 
 // Global Variables
 std::string file_path;
+bool tried_arg_file_path = false;
 TreeMap<char, std::string> treemap;
 BinaryTree<char> treemapSet;
 
 int main(int argc, char const *argv[])
 {
 
-    // If there's something passed after the app, assume that's the file path location
-    if (argc > 1) {
-        file_path = argv[1];
-    }
+    do {
+        // If there's something passed after the app, assume that's the file path location
+        if (argc > 1 && !tried_arg_file_path) {
+            file_path = argv[1];
+        }
 
-    // Otherwise: ask in app
-    else {
-        std::cout << "Enter your file name inside of the /data folder: ";
-        std::cin >> file_path;
-        // Making sure the file is a .txt
-        if (file_path.substr(file_path.length()-4) != ".txt") { file_path += ".txt"; }
-        file_path = "Proyecto/data/" + file_path;
-    }
+        // Otherwise: ask in app
+        else {
+            std::cout << "\nEnter your file name inside of the /data folder: ";
+            std::cin >> file_path;
+            // Making sure the file is a .txt
+            if (file_path.length() < 5 || file_path.substr(file_path.length()-4) != ".txt") { file_path += ".txt"; }
+            file_path = ".\\data\\" + file_path;
+        }
 
-    read_file(file_path, treemap);
+        std::cout << file_path + "\n";
+
+    } while (!read_file(file_path, treemap));
     
     menu(treemap);
 
@@ -46,12 +50,13 @@ bool valid_char(char c) {
     return false;
 }
 
-void read_file(const std::string &file_path, TreeMap<char, std::string> &treemap) {
+bool read_file(const std::string &file_path, TreeMap<char, std::string> &treemap) {
     std::ifstream file(file_path);
 
     if (!file.is_open()) {
         std::cerr << "Error: Couldn't open the file at " << file_path << '\n';
-        return;
+        tried_arg_file_path = true;
+        return false;
     }
 
     // Parse file: Add all items to TreeMap<KVPair<char FIRST LETTER OF WORD, std::string WORD>>
@@ -102,6 +107,8 @@ void read_file(const std::string &file_path, TreeMap<char, std::string> &treemap
 
     // All words added, file parsed, make the keySet
     treemapSet = treemap.keySet();
+
+    return true;
 }
 
 void menu(TreeMap<char, std::string> &treemap) {
