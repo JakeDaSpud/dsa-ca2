@@ -3,7 +3,7 @@
 *.doc
 
 # Input Data Files
-Proyecto/data/*.txt
+Proyecto/data/*
 
 # Output Files
 Proyecto/build/

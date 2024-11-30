@@ -18,6 +18,8 @@ The [Catch2](https://github.com/catchorg/Catch2/blob/v2.x/single_include/catch2/
 
 I am using [Visual Studio Code](https://code.visualstudio.com/) and [Notepad++](https://notepad-plus-plus.org/) for coding, [g++](https://gcc.gnu.org/) (from GCC) for compiling, and [Catch2](https://github.com/catchorg/Catch2/blob/v2.x/single_include/catch2/catch.hpp) for Unit Testing.
 
+The dataset I'm using is an edited version of [these videogames sales](https://www.kaggle.com/datasets/rush4ratio/video-game-sales-with-ratings).
+
 ---
 
 ### Building / Compiling / Project Structure
@@ -62,20 +64,20 @@ Turn the provided Binary Search Tree code into TreeMap code, and implement these
 
 # Stage 2 ✅
 
-Using your TreeMap and Binary Search Tree, make a CLI App that reads a .txt file and sorts and stores all unique words by their first letter.
+Using your TreeMap and Binary Search Tree, make a CLI App that reads a .txt file and sorts and stores all unique words by their first letter. ✅
 
 In the App, the user can view:
-- List of letters that have 1+ words stored.
-- All of the words for a given letter.
+- List of letters that have 1+ words stored. ✅
+- All of the words for a given letter. ✅
 
-Modify the print() method of the Binary Search Tree code for display.
+Modify the print() method of the Binary Search Tree code for display. ✅
 
 ---
 
-# Stage 3
+# Stage 3 ✅
 
-Make a .csv file with at least 100 rows of data. 
-There should be at least 5 fields of at least 2 different data types. 
+Make a .csv file with at least 100 rows of data. ✅
+There should be at least 5 fields of at least 2 different data types. ✅
 You may use online data generation tools to generate your data.
 
 ---
