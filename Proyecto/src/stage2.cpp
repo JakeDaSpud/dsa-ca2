@@ -70,11 +70,10 @@ bool read_file(std::string &file_path, TreeMap<char, std::string> &treemap) {
     // Go through char by char
     while (file.get(current)) {
         // all chars have to be uppercase, so if not in english alphabet ranges of ASCII (uppercase = 65-90 and lowercase = 97-122), we ignore
-        if (!valid_char(current)) {
-            continue;
+        if (valid_char(current) && current != ' ' && current != '\n') {
+            current = toupper(current);
+            word += current;
         }
-
-        current = toupper(current);
 
         // if '\n' or ' ' -> we need to add the previously-made word into the treemap
         if (word != "" && (current == ' ' || current == '\n')) {
@@ -90,11 +89,6 @@ bool read_file(std::string &file_path, TreeMap<char, std::string> &treemap) {
             }
 
             word = ""; // Reset word
-        }
-
-        // make uppercase and add to word
-        else {
-            word += current;
         }
     }
 
