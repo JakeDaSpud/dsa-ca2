@@ -92,7 +92,7 @@ In the App, the user can:
 - Create an index on one of the data fields and display the: 
 - - Unique entries for that field.
 - - Number of rows that contain that value.
-- View a subset of the data, based on a user-given value for any ONE field.
+- View a subset of the data, based on a user-given value for any ONE field. ✅
 
-All data should be clearly and neatly presented.
-Efficient Memory Management must be applied.
+All data should be clearly and neatly presented. ✅
+Efficient Memory Management must be applied. ✅
