@@ -13,8 +13,7 @@ bool tried_arg_file_path = false;
 TreeMap<char, std::string> treemap;
 BinaryTree<char> treemapSet;
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
 
     do {
         // If there's something passed after the app, assume that's the file path location
