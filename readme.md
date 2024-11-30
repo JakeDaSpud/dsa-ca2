@@ -6,7 +6,7 @@ Jake O'Reilly D00256438
 
 ### Worth 20%
 
-### Due: 28th November 2024
+### Due: 1st December 2024
 
 ---
 
@@ -43,7 +43,7 @@ g++ -static testing/test_file_name.cpp -o ./build/bin/test_file_name.exe
 
 ---
 
-# Stage 1
+# Stage 1 ✅
 
 Turn the provided Binary Search Tree code into TreeMap code, and implement these functions:
 
@@ -60,7 +60,7 @@ Turn the provided Binary Search Tree code into TreeMap code, and implement these
 
 ---
 
-# Stage 2
+# Stage 2 ✅
 
 Using your TreeMap and Binary Search Tree, make a CLI App that reads a .txt file and sorts and stores all unique words by their first letter.
 
