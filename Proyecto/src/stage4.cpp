@@ -1,6 +1,7 @@
 #include "TreeMap.h"
 #include <string>
 #include <fstream>
+#include <sstream>
 
 struct data;
 std::ostream& operator<<(std::ostream& os, const data d);
@@ -22,11 +23,16 @@ int dataLength[5] = {(int)dataHeaders[0].length(), (int)dataHeaders[1].length(),
 // These are going to be stored in a KVPair of type <std::string (name / primary key), data (other info)>
 // Struct for Data Rows
 struct data {
-    // Name not stored in this struct, it is the key associated with this struct
+    std::string name;
     std::string platform;
     std::string genre;
     std::string publisher;
     int year;
+
+    // Operators
+    bool operator==(const data& other) const { return this->name == other.name; }
+    bool operator<(const data& other) const { return this->name < other.name; }
+    bool operator>(const data& other) const { return this->name > other.name; }
 };
 typedef struct data data; // Here so I don't have to write stuct data everywhere, I can just write data
 
@@ -77,6 +83,9 @@ int main(int argc, char const *argv[]) {
         std::cout << "Trying to open " << file_path + "\n";
 
     } while (!read_file(file_path, treemap));
+
+    std::cout << "DEBUG PRINT:\n";
+    treemap.keySet().printInOrder();
     
     menu(treemap);
 
@@ -93,7 +102,45 @@ bool read_file(std::string &file_path, TreeMap<std::string, BinaryTree<data>> &t
 
     std::cout << "Success\n";
 
+    // Parsing file
+    std::string row;
+    std::string current;
 
+    // Skip first Headers line
+    getline(file, row);
+
+    // Parsing .csv and creating all the BSTNode<data> nodes for the TreeMap's BinaryTree
+    int newDataCount = 0;
+
+    // In the data row
+    while (std::getline(file, row)) {
+        newDataCount++;
+
+        // Geting each word in the row
+        std::stringstream currentRow(row);
+        std::string yearString; // Needs to be converted to int
+        data newData;
+    
+        std::getline(currentRow, newData.name, ',');
+        std::getline(currentRow, newData.platform, ',');
+        std::getline(currentRow, newData.genre, ',');
+        std::getline(currentRow, newData.publisher, ',');
+        
+        std::getline(currentRow, yearString, ',');
+        newData.year = std::stoi(yearString);
+
+        if (treemap.containsKey(newData.name)) {
+            treemap.get(newData.name).add(newData);
+        } else {
+            BinaryTree<data> newTree;
+            newTree.add(newData);
+            treemap.put(newData.name, newTree);
+        }
+
+        std::cout << "Added " << newDataCount << " rows\n";
+    }
+
+    std::cout << "Finished reading file\n";
 
     file.close();
 
@@ -122,20 +169,32 @@ void menu(TreeMap<std::string, BinaryTree<data>> &treemap) {
         switch (userInput[0]) {
         case '1':
             std::cout << "\n[1] Choose one of the following fields to index for:\n" <<
-            "1. Name\n" <<
-            "2. Platform\n" <<
-            "3. Genre\n" <<
-            "4. Publisher\n" <<
-            "5. Year\n" <<
+            "1. " << dataHeaders[1] << '\n' <<
+            "2. " << dataHeaders[2] << '\n' <<
+            "3. " << dataHeaders[3] << '\n' <<
+            "4. " << dataHeaders[4] << '\n' <<
             "Enter: ";
             std::getline(std::cin, userInput);
 
             switch (userInput[0]) {
             case '1':
+                std::cout << "\n[1] Indexing on " << dataHeaders[1] << ":\n";
                 
                 break;
 
-            case '2': case '3': case '4': case '5':
+            case '2':
+                std::cout << "\n[1] Indexing on " << dataHeaders[2] << ":\n";
+
+                break;
+
+            case '3':
+                std::cout << "\n[1] Indexing on " << dataHeaders[3] << ":\n";
+            
+                break;
+
+            case '4':
+                std::cout << "\n[1] Indexing on " << dataHeaders[4] << ":\n";
+
                 break;
             
             default:

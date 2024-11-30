@@ -77,7 +77,9 @@ Modify the print() method of the Binary Search Tree code for display. ✅
 # Stage 3 ✅
 
 Make a .csv file with at least 100 rows of data. ✅
+
 There should be at least 5 fields of at least 2 different data types. ✅
+
 You may use online data generation tools to generate your data.
 
 ---
