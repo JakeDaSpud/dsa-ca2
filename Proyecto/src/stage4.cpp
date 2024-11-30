@@ -130,6 +130,22 @@ bool read_file(std::string &file_path, TreeMap<std::string, BinaryTree<data>> &t
         std::getline(currentRow, yearString, ',');
         newData.year = std::stoi(yearString);
 
+        // Check if these are longer than the max lengths already
+        if (newData.name.length() > dataLength[0])
+            dataLength[0] = newData.name.length();
+
+        if (newData.platform.length() > dataLength[1])
+            dataLength[1] = newData.platform.length();
+
+        if (newData.genre.length() > dataLength[2])
+            dataLength[2] = newData.genre.length();
+
+        if (newData.publisher.length() > dataLength[3])
+            dataLength[3] = newData.publisher.length();
+
+        if (yearString.length() > dataLength[4])
+            dataLength[4] = yearString.length();
+
         if (treemap.containsKey(newData.name)) {
             treemap.get(newData.name).add(newData);
         } else {
@@ -149,6 +165,38 @@ bool read_file(std::string &file_path, TreeMap<std::string, BinaryTree<data>> &t
     treemapSet = treemap.keySet();
 
     return true;
+}
+
+void tablePrintFullRow(data* d) {
+    std::string name(dataLength[0], ' ');
+    std::string platform(dataLength[1], ' ');
+    std::string genre(dataLength[2], ' ');
+    std::string publisher(dataLength[3], ' ');
+    std::string year(dataLength[4], ' ');
+
+    std::string spacer = " | ";
+
+    for (int i = 0; i < d->name.length(); i++) {
+        name[i] = d->name[i];
+    }
+
+    for (int i = 0; i < d->platform.length(); i++) {
+        platform[i] = d->platform[i];
+    }
+
+    for (int i = 0; i < d->genre.length(); i++) {
+        genre[i] = d->genre[i];
+    }
+
+    for (int i = 0; i < d->publisher.length(); i++) {
+        publisher[i] = d->publisher[i];
+    }
+
+    for (int i = 0; i < std::to_string(d->year).length(); i++) {
+        year[i] = std::to_string(d->year)[i];
+    }
+
+    std::cout << name << spacer << platform << spacer << genre << spacer << publisher << spacer << year << '\n';
 }
 
 void printIndexOnField(TreeMap<std::string, BinaryTree<data>> &treemap, int fieldIndex) {
@@ -174,7 +222,7 @@ void printDataWithValue(TreeMap<std::string, BinaryTree<data>> &treemap, std::st
         // Compare year and int
         for (int i = 0; i < treemap.size(); i++) {
             if (nodes[i].getValue().root->getItem().year == valueInt) {
-                std::cout << nodes[i].getValue().toArray()->name << '\n';
+                tablePrintFullRow(nodes[i].getValue().toArray());
             }
         }
         break;
