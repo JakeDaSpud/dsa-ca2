@@ -10,6 +10,7 @@ int main(int argc, char const *argv[]);
 std::string toupper(std::string &s);
 bool valid_file_path(const std::string &file_path);
 bool read_file(std::string &file_path, TreeMap<std::string, BinaryTree<data>> &treemap);
+void printIndexOnField(TreeMap<std::string, BinaryTree<data>> &treemap, int fieldIndex);
 void menu(TreeMap<std::string, BinaryTree<data>> &treemap);
 
 // Global Variables
@@ -150,6 +151,40 @@ bool read_file(std::string &file_path, TreeMap<std::string, BinaryTree<data>> &t
     return true;
 }
 
+void printIndexOnField(TreeMap<std::string, BinaryTree<data>> &treemap, int fieldIndex) {
+
+}
+
+void printDataWithValue(TreeMap<std::string, BinaryTree<data>> &treemap, std::string value, int fieldIndex) {
+    KVPair<std::string, BinaryTree<data>>* nodes = treemap.toArray();
+    int valueInt;
+
+    switch (fieldIndex) {
+    case 1:
+        // Compare name and string
+        for (int i = 0; i < treemap.size(); i++) {
+            if (nodes[i].getKey() == value) {
+                std::cout << nodes[i].getValue().toArray() << '\n';
+            }
+        }
+        break;
+
+    case 5:
+        valueInt = std::stoi(value);
+        // Compare year and int
+        for (int i = 0; i < treemap.size(); i++) {
+            if (nodes[i].getValue().root->getItem().year == valueInt) {
+                std::cout << nodes[i].getValue().toArray()->name << '\n';
+            }
+        }
+        break;
+
+    default:
+        std::cout << "Unrecognised fieldIndex!\n";
+        break;
+    }
+}
+
 void menu(TreeMap<std::string, BinaryTree<data>> &treemap) {
     std::string userInput;
     char sentinel = '0';
@@ -179,22 +214,22 @@ void menu(TreeMap<std::string, BinaryTree<data>> &treemap) {
             switch (userInput[0]) {
             case '1':
                 std::cout << "\n[1] Indexing on " << dataHeaders[1] << ":\n";
-                
+                printIndexOnField(treemap, 1);
                 break;
 
             case '2':
                 std::cout << "\n[1] Indexing on " << dataHeaders[2] << ":\n";
-
+                printIndexOnField(treemap, 2);
                 break;
 
             case '3':
                 std::cout << "\n[1] Indexing on " << dataHeaders[3] << ":\n";
-            
+                printIndexOnField(treemap, 3);
                 break;
 
             case '4':
                 std::cout << "\n[1] Indexing on " << dataHeaders[4] << ":\n";
-
+                printIndexOnField(treemap, 4);
                 break;
             
             default:
@@ -205,15 +240,52 @@ void menu(TreeMap<std::string, BinaryTree<data>> &treemap) {
             break;
 
         case '2':
-            std::cout << "\n[2] Choose one of the following letters to view the words for:\n" ;
-            // print treemapSet
-            treemapSet.printPreOrder();
-            std::cout << "Enter: ";
-            std::cin >> userInput;
+            std::cout << "\n[2] Choose one of the following fields to search a specific value for:\n" <<
+            "1. " << dataHeaders[0] << '\n' <<
+            "2. " << dataHeaders[1] << '\n' <<
+            "3. " << dataHeaders[2] << '\n' <<
+            "4. " << dataHeaders[3] << '\n' <<
+            "5. " << dataHeaders[4] << '\n' <<
+            "Enter: ";
+            std::getline(std::cin, userInput);
 
-            userInput = toupper(userInput);
+            int wantedFieldIndex;
 
+            switch (userInput[0]) {
+            case '1':
+                std::cout << "\n[2] Enter a " << dataHeaders[0] << " to search for: ";
+                std::getline(std::cin, userInput);
+                printDataWithValue(treemap, userInput, 1);
+                break;
 
+            case '2':
+                std::cout << "\n[2] Enter a " << dataHeaders[1] << " to search for: ";
+                std::getline(std::cin, userInput);
+                printDataWithValue(treemap, userInput, 2);
+                break;
+
+            case '3':
+                std::cout << "\n[2] Enter a " << dataHeaders[2] << " to search for: ";
+                std::getline(std::cin, userInput);
+                printDataWithValue(treemap, userInput, 3);
+                break;
+
+            case '4':
+                std::cout << "\n[2] Enter a " << dataHeaders[3] << " to search for: ";
+                std::getline(std::cin, userInput);
+                printDataWithValue(treemap, userInput, 4);
+                break;
+
+            case '5':
+                std::cout << "\n[2] Enter a " << dataHeaders[4] << " to search for: ";
+                std::getline(std::cin, userInput);
+                printDataWithValue(treemap, userInput, 5);
+                break;
+            
+            default:
+                std::cout << "\nUnrecognised command!\n";
+                break;
+            }
 
             std::cout << '\n';
             break;

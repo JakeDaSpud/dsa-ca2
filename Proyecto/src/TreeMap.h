@@ -20,6 +20,7 @@ public:
     BinaryTree<K> keySet();
     void put(K key, V value);
     int size();
+	KVPair<K, V>* toArray();
     bool removeKey(K key);
     V& operator[](K key);
 };
@@ -168,6 +169,15 @@ template <typename K, typename V>
 int TreeMap<K, V>::size() {
     return this->tree.count();
 };
+
+/// @brief Turns the nodes of this tree into an Array
+/// @tparam K 
+/// @tparam V 
+/// @return The first item of the Array
+template <typename K, typename V>
+KVPair<K, V>* TreeMap<K, V>::toArray() {
+    return this->tree.toArray();
+}
 
 /// @brief Removes the item denoted by the given key.
 /// @tparam K Datatype of the KVPair Key
