@@ -2,14 +2,5 @@
 *.docx
 *.doc
 
-# Input Data Files
-Proyecto/data/*
-
-# Output Files
-Proyecto/build/
-*.obj
-*.o
-*.exe
-
 # VSC Files
 .vscode/
