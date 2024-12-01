@@ -12,6 +12,13 @@ bool valid_file_path(const std::string &file_path);
 bool read_file(std::string &file_path, TreeMap<std::string, BinaryTree<data>> &treemap);
 void printIndexOnField(TreeMap<std::string, BinaryTree<data>> &treemap, int fieldIndex);
 void menu(TreeMap<std::string, BinaryTree<data>> &treemap);
+std::string toupper(std::string &s);
+void tablePrintHeaders(data* d, int indexField, int secondaryField);
+void tablePrintSized(std::string &d, int indexField);
+void tablePrintFullRow(data* d);
+void updateUniqueValues(std::string &currentValue, std::string *uniqueValues, int &nextUniqueValueIndex, int *valueCounts);
+void printIndexOnField(TreeMap<std::string, BinaryTree<data>> &treemap, const int &treemapSize, int fieldIndex);
+void printDataWithValue(TreeMap<std::string, BinaryTree<data>> &treemap, std::string value, int fieldIndex);
 
 // Global Variables
 std::string file_path;
@@ -35,7 +42,7 @@ struct data {
     bool operator<(const data& other) const { return this->name < other.name; }
     bool operator>(const data& other) const { return this->name > other.name; }
 };
-typedef struct data data; // Here so I don't have to write stuct data everywhere, I can just write data
+typedef struct data data; // Here so I don't have to write struct data everywhere, I can just write data
 
 std::ostream& operator<<(std::ostream& os, const data d) { 
     os << d.platform << ", "  << d.genre << ", "  << d.publisher << ", " << d.year << '\n';
@@ -87,8 +94,8 @@ int main(int argc, char const *argv[]) {
 
     } while (!read_file(file_path, treemap));
 
-    std::cout << "DEBUG PRINT:\n";
-    treemap.keySet().printInOrder();
+    //std::cout << "DEBUG PRINT:\n";
+    //treemap.keySet().printInOrder();
     
     menu(treemap);
 
@@ -156,7 +163,7 @@ bool read_file(std::string &file_path, TreeMap<std::string, BinaryTree<data>> &t
             treemap.put(newData.name, newTree);
         }
 
-        std::cout << "Added " << newDataCount << " rows\n";
+        //std::cout << "Added " << newDataCount << " rows\n";
     }
 
     std::cout << "Finished reading file\n";
@@ -373,6 +380,24 @@ void printDataWithValue(TreeMap<std::string, BinaryTree<data>> &treemap, std::st
     KVPair<std::string, BinaryTree<data>>* nodes = treemap.toArray();
     int valueInt;
     value = toupper(value);
+    std::string spacer = "-|-";
+    std::string divider(dataLength[0], '-');
+    divider += spacer;
+    divider += std::string(dataLength[1], '-');
+    divider += spacer;
+    divider += std::string(dataLength[2], '-');
+    divider += spacer;
+    divider += std::string(dataLength[3], '-');
+    divider += spacer;
+    divider += std::string(dataLength[4], '-');
+
+    for (int i = 0; i < 5; i++) {
+        tablePrintSized(dataHeaders[i], i+1);
+        if (i != 4)
+            std::cout << " | ";
+    }
+
+    std::cout << '\n' << divider << '\n';
 
     switch (fieldIndex) {
     case 1:

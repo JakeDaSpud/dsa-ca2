@@ -84,14 +84,14 @@ You may use online data generation tools to generate your data.
 
 ---
 
-# Stage 4
+# Stage 4 ✅
 
 Make a CLI App that lets the user view and search Stage 3's data.
 
 In the App, the user can:
 - Create an index on one of the data fields and display the: 
-- - Unique entries for that field.
-- - Number of rows that contain that value.
+- - Unique entries for that field. ✅
+- - Number of rows that contain that value. ✅
 - View a subset of the data, based on a user-given value for any ONE field. ✅
 
 All data should be clearly and neatly presented. ✅
