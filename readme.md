@@ -20,6 +20,14 @@ I am using [Visual Studio Code](https://code.visualstudio.com/) and [Notepad++](
 
 The dataset I'm using is an edited version of [these videogames sales](https://www.kaggle.com/datasets/rush4ratio/video-game-sales-with-ratings).
 
+Your data for both apps should be placed in the ```/data/``` directory, for Stage2_App.exe you should use .txt, and for Stage4_App.exe you should use .csv
+
+You can also specify a specific file path in the command line arguments, for example (from the ```Proyecto/``` directory):
+
+```.\build\bin\Stage2_App.exe .\data\s2test3.txt```
+
+Will run Stage2 with the s2test3.txt file as the input! The app is set up to try read this, and even if you forget the ".txt" in the file name, it'll try fix it!
+
 ---
 
 ### Building / Compiling / Project Structure
