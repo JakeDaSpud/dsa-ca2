@@ -85,7 +85,7 @@ int main(int argc, char const *argv[]) {
             if (valid_file_path(file_path)) {
                 file_path += ".csv";
             }
-            file_path = ".\\data\\" + file_path;
+            file_path = "../../data/" + file_path;
         }
 
         std::cout << "Trying to open " << file_path + "\n";

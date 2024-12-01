@@ -29,7 +29,7 @@ int main(int argc, char const *argv[]) {
 
             // Making sure the file is a .txt
             if (!file_path.empty() || (file_path.length() < 5 && file_path.substr(file_path.length()-4) != ".txt")) { file_path += ".txt"; }
-            file_path = ".\\data\\" + file_path;
+            file_path = "../../data/" + file_path;
         }
 
         std::cout << "Trying to open " << file_path + "\n";

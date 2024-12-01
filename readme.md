@@ -8,6 +8,8 @@ Jake O'Reilly D00256438
 
 ### Due: 1st December 2024
 
+[GitHub Repo Link](https://github.com/JakeDaSpud/dsa-ca2)
+
 ---
 
 ### Notes
@@ -22,11 +24,22 @@ The dataset I'm using is an edited version of [these videogames sales](https://w
 
 Your data for both apps should be placed in the ```/data/``` directory, for Stage2_App.exe you should use .txt, and for Stage4_App.exe you should use .csv
 
-You can also specify a specific file path in the command line arguments, for example (from the ```Proyecto/``` directory):
+You can also specify a specific file path in the command line arguments, for example (from the ```Proyecto/build/bin/``` directory):
 
-```.\build\bin\Stage2_App.exe .\data\s2test3.txt```
+Firstly, CD into the ```bin/``` directory:
+1. ```cd ./Proyecto/build/bin/```
+
+then:
+
+2.1. ```./Stage2_App.exe ../../data/s2test3.txt```
 
 Will run Stage2 with the s2test3.txt file as the input! The app is set up to try read this, and even if you forget the ".txt" in the file name, it'll try fix it!
+
+and:
+
+2.2.```./Stage4_App.exe ../../data/VG_Sales.csv```
+
+Will run Stage4 with the correct VG_Sales.csv file as the input.
 
 ---
 
